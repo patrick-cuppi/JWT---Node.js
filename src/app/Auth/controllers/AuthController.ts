@@ -16,7 +16,12 @@ class AuthController {
         }
     }
 
-    async destroy() {}
+    async destroy(req: Request, res: Response): Promise<Response> {
+
+        req.user.id && new AuthService().signOut(req.user.token)
+
+        return res.status(204).send()
+    }
 }
 
 export default new AuthController
